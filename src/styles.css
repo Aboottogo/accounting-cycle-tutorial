@@ -1,0 +1,1331 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #2563eb;
+  --primary-dark: #1e40af;
+  --success-color: #10b981;
+  --error-color: #ef4444;
+  --warning-color: #f59e0b;
+  --bg-color: #f9fafb;
+  --surface-color: #ffffff;
+  --border-color: #e5e7eb;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  background-color: var(--surface-color);
+  border-bottom: 2px solid var(--border-color);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.app-header h1 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.header-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.reset-btn {
+  padding: 0.5rem 1rem;
+  background-color: var(--error-color);
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background-color 0.2s;
+}
+
+.reset-btn:hover {
+  background-color: #dc2626;
+}
+
+.progress-bar-container {
+  padding: 1rem 2rem;
+  background-color: var(--surface-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.progress-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+  height: 8px;
+  background-color: var(--border-color);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--success-color);
+  transition: width 0.3s ease;
+}
+
+.tabs-container {
+  background-color: var(--surface-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tabs {
+  display: flex;
+  overflow-x: auto;
+  padding: 0 2rem;
+}
+
+.tab {
+  padding: 1rem 1.5rem;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.tab:hover {
+  color: var(--primary-color);
+  background-color: var(--bg-color);
+}
+
+.tab.active {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+  font-weight: 600;
+}
+
+@keyframes flashBlue {
+  0% {
+    background-color: transparent;
+    color: var(--text-secondary);
+  }
+  50% {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  100% {
+    background-color: transparent;
+    color: var(--text-secondary);
+  }
+}
+
+.tab.flash-blue {
+  animation: flashBlue 2s ease-in-out;
+}
+
+.app-main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.tab-content {
+  background-color: var(--surface-color);
+  border-radius: 0.5rem;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.tab-content h2 {
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.introduction-section {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.introduction-section h2 {
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  font-size: 1.75rem;
+}
+
+.introduction-text {
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.project-goals {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: var(--bg-color);
+  border-radius: 0.5rem;
+  border-left: 4px solid var(--primary-color);
+}
+
+.project-goals h3 {
+  margin-bottom: 0.75rem;
+  color: var(--primary-color);
+  font-size: 1.25rem;
+}
+
+.project-goals p {
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.accounting-cycle-steps {
+  margin-bottom: 2rem;
+}
+
+.accounting-cycle-steps h3 {
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  font-size: 1.25rem;
+}
+
+.cycle-steps-list {
+  list-style: decimal;
+  padding-left: 2rem;
+  margin-bottom: 1rem;
+}
+
+.cycle-steps-list li {
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.accounting-cycle-image {
+  margin: 2rem 0;
+  text-align: center;
+  background: transparent;
+}
+
+.flowchart-image {
+  max-width: 50%;
+  height: auto;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-md);
+  margin: 1rem 0;
+}
+
+.instructions-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: var(--bg-color);
+  border-radius: 0.5rem;
+  border-left: 4px solid var(--success-color);
+}
+
+.instructions-section h3 {
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  font-size: 1.25rem;
+}
+
+.instructions-section p {
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.instructions-list {
+  list-style: decimal;
+  padding-left: 2rem;
+  margin-bottom: 1rem;
+}
+
+.instructions-list li {
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.instructions-list li strong {
+  color: var(--primary-color);
+}
+
+.instructions-list.no-numbers {
+  list-style: none;
+  padding-left: 0;
+}
+
+.section-description {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+.company-context {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: var(--bg-color);
+  border-radius: 0.5rem;
+  border-left: 4px solid var(--primary-color);
+}
+
+.company-context h2 {
+  margin-bottom: 0.5rem;
+}
+
+.company-industry {
+  font-style: italic;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.transactions-section {
+  margin-bottom: 2rem;
+}
+
+.company-context .transactions-section:first-of-type {
+  margin-top: 2rem;
+}
+
+.transactions-list {
+  list-style: none;
+  counter-reset: transaction-counter;
+}
+
+.transaction-item {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  background-color: var(--bg-color);
+  border-radius: 0.375rem;
+  border-left: 3px solid var(--border-color);
+  align-items: start;
+}
+
+.transaction-item::before {
+  counter-increment: transaction-counter;
+  content: counter(transaction-counter);
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.transaction-id {
+  font-weight: 600;
+  color: var(--primary-color);
+  font-family: monospace;
+}
+
+.transaction-date {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.transaction-description {
+  color: var(--text-primary);
+}
+
+.journal-entry-form {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border: 2px solid var(--border-color);
+  border-radius: 0.5rem;
+  background-color: var(--surface-color);
+}
+
+.journal-entry-form.posted {
+  border-color: var(--success-color);
+  background-color: #f0fdf4;
+}
+
+.journal-entry-header {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.transaction-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.journal-entry-grid {
+  margin-bottom: 1rem;
+  border-bottom: none;
+}
+
+.journal-grid-header,
+.journal-grid-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 120px 120px 140px;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  align-items: center;
+}
+
+.journal-date-empty {
+  /* Empty cell for date column on non-first rows */
+}
+
+.journal-grid-header {
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-bottom: 2px solid var(--border-color);
+  margin-bottom: 0.5rem;
+}
+
+.journal-grid-row {
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-color);
+}
+
+.journal-grid-row input,
+.journal-grid-row select {
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.journal-grid-row input:disabled,
+.journal-grid-row select:disabled {
+  background-color: var(--bg-color);
+  cursor: not-allowed;
+}
+
+.journal-date-input {
+  width: 100%;
+}
+
+.journal-date-empty {
+  /* Empty cell to maintain grid alignment */
+  min-height: 1px;
+}
+
+.amount-col {
+  text-align: right;
+  font-family: monospace;
+  width: 120px;
+  min-width: 120px;
+  max-width: 120px;
+}
+
+.amount-input {
+  text-align: right;
+}
+
+.add-line-btn,
+.add-entry-btn,
+.remove-line-btn {
+  padding: 0.25rem 0.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.add-entry-btn {
+  padding: 0.75rem 1.5rem;
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+.remove-line-btn {
+  background-color: var(--error-color);
+  width: 30px;
+  height: 30px;
+}
+
+.journal-entry-form.in-progress .remove-line-btn {
+  background-color: transparent;
+  color: var(--text-primary);
+  padding: 0;
+  width: auto;
+  height: auto;
+  margin-left: 0;
+  text-align: left;
+  justify-self: start;
+}
+
+.add-line-btn:hover {
+  background-color: var(--primary-dark);
+}
+
+.journal-totals {
+  display: grid;
+  grid-template-columns: 120px 1fr 120px 120px 140px;
+  gap: 0.5rem;
+  padding: 0.75rem 0.5rem;
+  margin-top: 0.5rem;
+  font-weight: 600;
+}
+
+.unbalanced {
+  color: var(--error-color);
+}
+
+.balanced-indicator {
+  color: var(--success-color);
+}
+
+.journal-completion-message {
+  margin-top: 1.5rem;
+  padding: 1rem 1.5rem;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.green-checkmark {
+  color: var(--success-color);
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.ledger-completion-message {
+  margin-top: 2rem;
+  padding: 1rem 1.5rem;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.post-btn {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--success-color);
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+  width: 190px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.post-btn:hover {
+  background-color: #059669;
+}
+
+.post-btn.flash-error {
+  animation: flashError 0.5s ease-in-out;
+  background-color: var(--error-color);
+  width: 190px;
+}
+
+.post-btn.flash-error:hover {
+  background-color: #dc2626;
+}
+
+.solution-row {
+  margin-top: 0.5rem;
+  border-bottom: none;
+  background-color: transparent;
+}
+
+.solution-row > div:first-child {
+  display: flex;
+  justify-content: flex-start;
+  min-width: 0;
+  overflow: visible;
+}
+
+.solution-row > div:first-child .post-btn {
+  flex-shrink: 0;
+  width: 190px;
+}
+
+.solution-row > div:last-child {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.show-solution-btn {
+  padding: 0.5rem 1rem;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.show-solution-btn:hover {
+  background-color: var(--bg-tertiary);
+  border-color: var(--text-secondary);
+}
+
+@keyframes flashError {
+  0%, 100% {
+    background-color: var(--error-color);
+    transform: scale(1);
+  }
+  50% {
+    background-color: #fca5a5;
+    transform: scale(1.05);
+  }
+}
+
+.status-pill {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-not-started {
+  background-color: var(--bg-color);
+  color: var(--text-secondary);
+}
+
+.status-in-progress {
+  background-color: #dbeafe;
+  color: var(--primary-dark);
+}
+
+.status-posted {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.status-correct {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.status-incorrect {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.ledger-category {
+  margin-bottom: 2rem;
+}
+
+.ledger-category h3 {
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.t-accounts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.t-account {
+  border: 2px solid var(--border-color);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background-color: var(--surface-color);
+}
+
+.t-account-header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.75rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.account-number {
+  font-weight: 600;
+  font-family: monospace;
+}
+
+.account-name {
+  font-weight: 500;
+}
+
+.t-account-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.t-account-debit,
+.t-account-credit {
+  padding: 0.5rem;
+  border-right: 1px solid var(--border-color);
+}
+
+.t-account-credit {
+  border-right: none;
+  border-left: 1px solid var(--border-color);
+}
+
+.t-account-column-header {
+  font-weight: 600;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  text-align: center;
+  background-color: var(--bg-color);
+}
+
+.t-account-entry {
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.875rem;
+}
+
+.t-account-debit .t-account-entry {
+  justify-content: space-between;
+}
+
+.t-account-credit .t-account-entry {
+  justify-content: flex-end;
+}
+
+.t-account-entry.adjusting {
+  background-color: #dbeafe;
+}
+
+.t-account-entry.closing {
+  background-color: #fef3c7;
+}
+
+.entry-reference {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.t-account-debit .entry-reference {
+  text-align: left;
+  margin-right: 0.5rem;
+}
+
+.t-account-credit .entry-reference {
+  text-align: right;
+  margin-left: 0.5rem;
+  width: 3.5em;
+}
+
+.entry-amount {
+  font-family: monospace;
+  font-weight: 600;
+  white-space: nowrap;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.t-account-balance {
+  padding: 0.75rem 0.5rem;
+  font-weight: 600;
+  border-top: 2px solid var(--border-color);
+  background-color: var(--bg-color);
+  text-align: right;
+  font-family: monospace;
+}
+
+.trial-balance-section {
+  margin-bottom: 2rem;
+}
+
+.trial-balance-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--surface-color);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.trial-balance-table thead {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.trial-balance-table th {
+  padding: 0.75rem;
+  text-align: left;
+  font-weight: 600;
+}
+
+.trial-balance-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.trial-balance-table tbody tr:hover {
+  background-color: var(--bg-color);
+}
+
+.totals-row {
+  font-weight: 600;
+  background-color: var(--bg-color);
+  border-top: 2px solid var(--border-color);
+}
+
+.balance-check {
+  font-weight: 600;
+  text-align: center;
+}
+
+.balance-check.balanced {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.balance-check.unbalanced {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.worksheet-container {
+  margin-bottom: 2rem;
+}
+
+.worksheet-table-wrapper {
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow);
+}
+
+.worksheet-table {
+  width: 100%;
+  min-width: 1200px;
+  border-collapse: collapse;
+  background-color: var(--surface-color);
+}
+
+.worksheet-table thead {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.worksheet-table th {
+  padding: 0.4rem;
+  text-align: left;
+  font-weight: 600;
+  white-space: nowrap;
+  border-right: none;
+}
+
+/* Reduce vertical padding in header rows */
+.worksheet-table thead tr th {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+}
+
+/* Add right border only to Credit columns (separators between sections)
+.worksheet-table th:nth-child(3),
+.worksheet-table th:nth-child(5),
+.worksheet-table th:nth-child(7),
+.worksheet-table th:nth-child(9),
+.worksheet-table td:nth-child(3),
+.worksheet-table td:nth-child(5),
+.worksheet-table td:nth-child(7),
+.worksheet-table td:nth-child(9) {
+  border-right: 3px solid var(--border-color);
+} */
+
+.worksheet-table th.section-header {
+  text-align: center;
+  border-left: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 600;
+}
+
+.worksheet-table th.section-header-label {
+  text-align: center;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.worksheet-table th.section-header-unadjusted,
+.worksheet-table th.section-header-adjusted,
+.worksheet-table th.section-header-postclose {
+  background-color: var(--primary-color);
+}
+
+.worksheet-table th.section-header-adjusting,
+.worksheet-table th.section-header-closing {
+  background-color: #6b7280;
+}
+
+.worksheet-table th.account-number-col {
+  position: sticky;
+  left: 0;
+  background-color: var(--primary-color);
+  z-index: 11;
+  border-right: 1px solid var(--primary-color);
+  min-width: 100px;
+  width: auto;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.worksheet-table th.account-col {
+  position: sticky;
+  left: 100px;
+  background-color: var(--primary-color);
+  z-index: 10;
+  border-right: 1px solid var(--border-color);
+  min-width: 200px;
+  width: auto;
+  white-space: nowrap;
+}
+
+.worksheet-table td {
+  padding: 0.4rem;
+  border-bottom: 1px solid var(--border-color);
+  border-right: none;
+}
+
+.worksheet-table td.account-number-col {
+  position: sticky;
+  left: 0;
+  background-color: var(--surface-color);
+  z-index: 6;
+  font-weight: 500;
+  border-right: 1px solid var(--border-color) !important;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.05);
+  min-width: 100px;
+  width: auto;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.worksheet-table td.account-col {
+  position: sticky;
+  left: 100px;
+  background-color: var(--surface-color);
+  z-index: 5;
+  font-weight: 500;
+  border-right: 1px solid var(--border-color) !important;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.05);
+  min-width: 200px;
+  width: auto;
+  white-space: nowrap;
+}
+
+/* Section separators - borders between sections */
+.worksheet-table td.section-unadjusted,
+.worksheet-table th.section-unadjusted {
+  border-left: 1px solid var(--border-color);
+}
+
+.worksheet-table td.section-adjusting,
+.worksheet-table th.section-adjusting {
+  border-left: 1px solid var(--border-color);
+  background-color: #f8fafc;
+}
+
+.worksheet-table td.section-adjusted,
+.worksheet-table th.section-adjusted {
+  border-left: 1px solid var(--border-color);
+  background-color: #f1f5f9;
+}
+
+.worksheet-table td.section-closing,
+.worksheet-table th.section-closing {
+  border-left: 1px solid var(--border-color);
+  background-color: #f8fafc;
+}
+
+.worksheet-table td.section-postclose,
+.worksheet-table th.section-postclose {
+  border-left: 1px solid var(--border-color);
+  background-color: #f1f5f9;
+}
+
+/* Header backgrounds for sections */
+.worksheet-table thead th.section-unadjusted {
+  background-color: var(--primary-color);
+}
+
+.worksheet-table thead th.section-adjusting {
+  background-color: #6b7280;
+}
+
+.worksheet-table thead th.section-adjusted {
+  background-color: var(--primary-color);
+}
+
+.worksheet-table thead th.section-closing {
+  background-color: #6b7280;
+}
+
+.worksheet-table thead th.section-postclose {
+  background-color: var(--primary-color);
+}
+
+/* Border between Debit and Credit cells in header rows - matches section background */
+/* Debit columns are: 3 (unadjusted), 5 (adjusting), 7 (adjusted), 9 (closing), 11 (postclose) */
+.worksheet-table thead tr:nth-child(2) th:nth-child(3) {
+  border-right: 1px solid var(--primary-color);
+}
+
+.worksheet-table thead tr:nth-child(2) th:nth-child(5) {
+  border-right: 1px solid #6b7280;
+}
+
+.worksheet-table thead tr:nth-child(2) th:nth-child(7) {
+  border-right: 1px solid var(--primary-color);
+}
+
+.worksheet-table thead tr:nth-child(2) th:nth-child(9) {
+  border-right: 1px solid #6b7280;
+}
+
+.worksheet-table thead tr:nth-child(2) th:nth-child(11) {
+  border-right: 1px solid var(--primary-color);
+}
+
+.worksheet-table tbody tr:hover td.account-number-col {
+  background-color: var(--bg-color);
+}
+
+.worksheet-table tbody tr:hover td.account-col {
+  background-color: var(--bg-color);
+}
+
+.worksheet-table tbody tr:hover {
+  background-color: var(--bg-color);
+}
+
+.worksheet-table tbody tr:hover td.section-unadjusted {
+  background-color: #ffffff;
+}
+
+.worksheet-table tbody tr:hover td.section-adjusting {
+  background-color: #f1f5f9;
+}
+
+.worksheet-table tbody tr:hover td.section-adjusted {
+  background-color: #e2e8f0;
+}
+
+.worksheet-table tbody tr:hover td.section-closing {
+  background-color: #f1f5f9;
+}
+
+.worksheet-table tbody tr:hover td.section-postclose {
+  background-color: #e2e8f0;
+}
+
+.worksheet-table tfoot .totals-row td.account-number-col {
+  background-color: var(--bg-color);
+  border-right: 1px solid var(--border-color);
+  min-width: 100px;
+}
+
+.worksheet-table tfoot .totals-row td.account-col {
+  background-color: var(--bg-color);
+  font-weight: 600;
+  border-right: 1px solid var(--border-color);
+  min-width: 200px;
+  width: auto;
+  white-space: nowrap;
+}
+
+.worksheet-table tfoot .totals-row td.section-unadjusted {
+  background-color: var(--bg-color);
+  border-left: 1px solid var(--border-color);
+}
+
+.worksheet-table tfoot .totals-row td.section-adjusting {
+  background-color: #f8fafc;
+  border-left: 1px solid var(--border-color);
+}
+
+.worksheet-table tfoot .totals-row td.section-adjusted {
+  background-color: #f1f5f9;
+  border-left: 1px solid var(--border-color);
+}
+
+.worksheet-table tfoot .totals-row td.section-closing {
+  background-color: #f8fafc;
+  border-left: 1px solid var(--border-color);
+}
+
+.worksheet-table tfoot .totals-row td.section-postclose {
+  background-color: #f1f5f9;
+  border-left: 1px solid var(--border-color);
+}
+
+/* Highlight animation for worksheet rows */
+/* Highlight appears instantly, no transition */
+.worksheet-table tbody tr.highlight-row td {
+  background-color: rgba(37, 99, 235, 0.2) !important;
+  transition: none !important;
+}
+
+.worksheet-table tbody tr.highlight-row td.account-number-col,
+.worksheet-table tbody tr.highlight-row td.account-col {
+  background-color: rgba(37, 99, 235, 0.2) !important;
+  z-index: 7;
+  transition: none !important;
+}
+
+/* Fade out transition applies when highlight class is removed */
+.worksheet-table tbody tr:not(.highlight-row) td {
+  transition: background-color 4s ease-out;
+}
+
+.worksheet-table tbody tr:not(.highlight-row) td.account-number-col,
+.worksheet-table tbody tr:not(.highlight-row) td.account-col {
+  transition: background-color 4s ease-out;
+}
+
+.worksheet-table tfoot .balance-check td {
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.statements-container {
+  position: relative;
+}
+
+.statement-section {
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.balance-sheet-container {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.balance-sheet-column {
+  flex: 1;
+  min-width: 0;
+}
+
+.statement-section h3 {
+  color: white;
+  background-color: var(--primary-color);
+  padding: 0.15rem 0.75rem;
+  margin-bottom: 0;
+  border-radius: 0.5rem 0.5rem 0 0;
+  text-align: center;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.company-name {
+  font-weight: 600;
+  font-size: 1.125rem;
+  margin-top: 0;
+  color: white;
+  background-color: var(--primary-color);
+  padding: 0.15rem 0.75rem;
+  text-align: center;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.statement-period {
+  color: white;
+  background-color: var(--primary-color);
+  margin-bottom: 0;
+  padding: 0.15rem 0.75rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+  text-align: center;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.balance-sheet-section h3,
+.balance-sheet-section .company-name,
+.balance-sheet-section .statement-period {
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.financial-statement {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--surface-color);
+  box-shadow: var(--shadow);
+  margin-top: 1rem;
+}
+
+.statement-section .financial-statement {
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.balance-sheet-container .financial-statement {
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.financial-statement thead {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+}
+
+.financial-statement th {
+  padding: 0.25rem 0.75rem;
+  text-align: left;
+  font-weight: 600;
+}
+
+.financial-statement td {
+  padding: 0.375rem 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.financial-statement tbody tr:hover {
+  background-color: var(--bg-color);
+}
+
+.subtotal-row {
+  font-weight: 600;
+  background-color: var(--bg-color);
+  border-top: 1px solid var(--border-color);
+}
+
+.total-row {
+  font-weight: 700;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  border-top: 2px solid var(--border-color);
+}
+
+.empty-state {
+  padding: 3rem;
+  text-align: center;
+  color: var(--text-secondary);
+  background-color: var(--bg-color);
+  border-radius: 0.5rem;
+}
+
+.arrow-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+  overflow: visible;
+}
+
+.arrow-source,
+.arrow-target {
+  position: relative;
+  z-index: 2;
+}
+
+.locked-section {
+  padding: 2rem;
+  text-align: center;
+  background-color: var(--bg-color);
+  border: 2px dashed var(--border-color);
+  border-radius: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.unlock-notice {
+  padding: 1rem;
+  background-color: #dbeafe;
+  color: var(--primary-dark);
+  border-radius: 0.375rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.app-footer {
+  padding: 1rem 2rem;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--surface-color);
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tabs {
+    padding: 0 1rem;
+  }
+
+  .app-main {
+    padding: 1rem;
+  }
+
+  .tab-content {
+    padding: 1rem;
+  }
+
+  .journal-grid-header,
+  .journal-grid-row,
+  .journal-totals {
+    grid-template-columns: 100px 1fr 90px 90px 30px;
+    font-size: 0.75rem;
+  }
+
+  .t-accounts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .transaction-item {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}
