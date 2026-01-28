@@ -10,9 +10,16 @@ import { WorksheetTab } from './tabs/WorksheetTab';
 import { StatementsTab } from './tabs/StatementsTab';
 import { scenario01 } from './domain/scenarios/scenario01';
 
+const FLASH_DURATION_MS = 2000;
+/** Start each next tab’s flash this many ms after the previous one, so they overlap. */
+const FLASH_STAGGER_MS = 1000;
+
 const AppContent = () => {
   const [activeTab, setActiveTab] = useState('home');
   const [flashLedgerTab, setFlashLedgerTab] = useState(false);
+  const [flashWorksheetTab, setFlashWorksheetTab] = useState(false);
+  const [flashStatementsTab, setFlashStatementsTab] = useState(false);
+  const [journalIntroRevealed, setJournalIntroRevealed] = useState(false);
   const { state, dispatch } = useAppState();
   const { initialTransactions, adjustingScenarios } = scenario01;
   const totalInitial = initialTransactions.length;
@@ -22,15 +29,20 @@ const AppContent = () => {
   const handleReset = () => {
     if (window.confirm('Are you sure you want to reset all your work? This cannot be undone.')) {
       dispatch({ type: ACTIONS.RESET_ALL });
+      setJournalIntroRevealed(false);
     }
   };
 
   const handleEntryPosted = () => {
+    setJournalIntroRevealed(true);
     setFlashLedgerTab(true);
-    // Remove the flash class after animation completes
+    setTimeout(() => setFlashWorksheetTab(true), FLASH_STAGGER_MS);
     setTimeout(() => {
       setFlashLedgerTab(false);
-    }, 2000);
+      setFlashStatementsTab(true);
+    }, FLASH_STAGGER_MS * 2);
+    setTimeout(() => setFlashWorksheetTab(false), FLASH_STAGGER_MS * 3);
+    setTimeout(() => setFlashStatementsTab(false), FLASH_STAGGER_MS * 4);
   };
 
   const renderTabContent = () => {
@@ -55,9 +67,12 @@ const AppContent = () => {
 
       <ProgressBar totalInitial={totalInitial} totalAdjusting={totalAdjusting} totalClosing={totalClosing} />
 
-      <Tabs activeTab={activeTab} onTabChange={setActiveTab} flashLedgerTab={flashLedgerTab} />
+      <Tabs activeTab={activeTab} onTabChange={setActiveTab} flashLedgerTab={flashLedgerTab} flashWorksheetTab={flashWorksheetTab} flashStatementsTab={flashStatementsTab} />
 
       <main className="app-main">
+        {activeTab === 'journal' && journalIntroRevealed && (
+          <p className="journal-intro-banner">Entries posted to the general ledger automatically update the worksheet and financial statements.</p>
+        )}
         {renderTabContent()}
       </main>
 

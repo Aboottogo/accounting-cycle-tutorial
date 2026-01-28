@@ -98,6 +98,9 @@ body {
 }
 
 .tabs-container {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   background-color: var(--surface-color);
   border-bottom: 1px solid var(--border-color);
 }
@@ -163,6 +166,25 @@ body {
   border-radius: 0.5rem;
   padding: 2rem;
   box-shadow: var(--shadow);
+}
+
+@keyframes journalIntroReveal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.journal-intro-banner {
+  margin: 0 0 1rem 0;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  padding: 0;
+  background: none;
+  text-align: center;
+  animation: journalIntroReveal 0.5s ease-out forwards;
 }
 
 .tab-content h2 {
