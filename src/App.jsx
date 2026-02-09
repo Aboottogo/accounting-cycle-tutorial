@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { db } from './lib/db';
 import { AppStateProvider, useAppState } from './state/AppStateProvider';
 import { ACTIONS } from './state/reducer';
 import { Tabs } from './components/Tabs';
 import { ProgressBar } from './components/ProgressBar';
+import { Login } from './components/Login';
 import { HomeTab } from './tabs/HomeTab';
 import { JournalTab } from './tabs/JournalTab';
 import { LedgerTab } from './tabs/LedgerTab';
@@ -56,12 +58,16 @@ const AppContent = () => {
     }
   };
 
+  const user = db.useUser();
+
   return (
     <div className="app">
       <header className="app-header">
         <h1>Accounting Cycle Learning App</h1>
         <div className="header-controls">
+          <span className="user-email">{user?.email}</span>
           <button onClick={handleReset} className="reset-btn">Reset All</button>
+          <button onClick={() => db.auth.signOut()} className="sign-out-btn">Sign out</button>
         </div>
       </header>
 
@@ -84,10 +90,39 @@ const AppContent = () => {
 };
 
 const App = () => {
+  const { isLoading, error } = db.useAuth();
+
+  if (isLoading) {
+    return (
+      <div className="login-screen">
+        <div className="login-card">
+          <p className="login-text">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="login-screen">
+        <div className="login-card">
+          <p className="login-text" style={{ color: 'var(--error-color)' }}>Error: {error.message}</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <AppStateProvider>
-      <AppContent />
-    </AppStateProvider>
+    <>
+      <db.SignedIn>
+        <AppStateProvider>
+          <AppContent />
+        </AppStateProvider>
+      </db.SignedIn>
+      <db.SignedOut>
+        <Login />
+      </db.SignedOut>
+    </>
   );
 };
 

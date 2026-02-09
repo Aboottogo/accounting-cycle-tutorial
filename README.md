@@ -10,7 +10,8 @@ An educational web application built with React and Vite to help introductory ac
 - **Worksheet**: Automatic generation of unadjusted and adjusted trial balances
 - **Financial Statements**: Auto-generated Income Statement and Balance Sheet
 - **Show Solution**: Individual "Show Solution" button on each journal entry to automatically populate the correct answer
-- **Auto-Save**: Progress automatically saved to browser localStorage
+- **User accounts**: Email-based login via InstantDB Magic Codes (passwordless); sign in once and your progress is saved in the cloud
+- **Auto-Save**: Progress automatically saved to InstantDB (and localStorage as backup) so you can resume where you left off
 - **Progress Tracking**: Visual indicator showing completion percentage
 
 ## Getting Started
@@ -28,6 +29,27 @@ An educational web application built with React and Vite to help introductory ac
 ```bash
 npm install
 ```
+
+3. **(Optional)** Set the InstantDB App ID via environment variable. The app uses the public App ID by default; to override, create a `.env` file in the project root:
+
+```
+VITE_INSTANT_APP_ID=your-instant-app-id
+```
+
+4. **(One-time)** Push the schema and permissions to your Instant app (requires an [Instant](https://instantdb.com/dash) account and logging in via the CLI):
+
+```bash
+npx instant-cli@latest init
+```
+
+Follow the prompts to link this project to your Instant app (App ID `566ffee5-e773-4b68-a132-29678f8f6eea` or your own). Then push the schema and permissions:
+
+```bash
+npx instant-cli@latest push schema
+npx instant-cli@latest push perms
+```
+
+Magic Code email login is enabled by default for Instant apps; you can customize the magic-code email template and sender in the Instant dashboard under Auth / Emails.
 
 ### Running the App
 
@@ -62,14 +84,17 @@ src/
 │   ├── scenarios/            # Transaction scenarios
 │   │   └── scenario01.js     # First scenario (company, transactions, solutions)
 │   └── accountingMath.js     # Accounting calculation helpers
+├── lib/
+│   └── db.js                 # InstantDB client init
 ├── state/                    # State management
-│   ├── AppStateProvider.jsx  # React Context provider
+│   ├── AppStateProvider.jsx  # React Context provider (loads/saves progress to InstantDB)
 │   ├── reducer.js            # State update logic
-│   └── storage.js            # localStorage persistence
+│   └── storage.js            # localStorage backup
 ├── components/               # Reusable UI components
 │   ├── Tabs.jsx             # Tab navigation
 │   ├── ProgressBar.jsx      # Progress indicator
-│   └── StatusPill.jsx       # Status badges
+│   ├── StatusPill.jsx       # Status badges
+│   └── Login.jsx            # Magic Code auth (email + code)
 ├── tabs/                     # Main tab components
 │   ├── TransactionsTab.jsx  # Transaction list display
 │   ├── JournalTab.jsx       # Journal entry forms
@@ -122,7 +147,9 @@ The solution comparison logic is in `src/domain/accountingMath.js`. The `compare
 ## Technical Notes
 
 - Uses React Context + useReducer for state management (beginner-friendly alternative to Redux)
-- Auto-saves to localStorage with versioning support for future migrations
+- Authentication: InstantDB Magic Codes (passwordless email login); see [Instant Auth docs](https://instantdb.com/docs/auth/magic-codes)
+- Progress is stored in InstantDB per user and synced when signed in; localStorage is used as a local backup
+- Schema and permissions are in `instant.schema.js` and `instant.perms.js` (push to Instant via CLI)
 - All calculations are derived from posted entries (single source of truth)
 - Responsive design works on laptop and tablet screens
 
